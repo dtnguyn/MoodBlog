@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityEditPost">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/glass_antiqua"
+        android:text="@string/edit_title"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_goneMarginTop="20dp" />
+
+    <Button
+        android:id="@+id/id_back_button_edit"
+        android:layout_width="79dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/transparent_button"
+        android:drawableLeft="@drawable/ic_back"
+        app:layout_constraintBottom_toTopOf="@+id/id_name_spinner_edit"
+        app:layout_constraintEnd_toStartOf="@+id/textView"
+        app:layout_constraintHorizontal_bias="0.164"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Spinner
+        android:id="@+id/id_name_spinner_edit"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        tools:layout_editor_absoluteX="8dp"
+        android:textAlignment="center"
+        android:background="@drawable/text_area">
+    </Spinner>
+
+    <Spinner
+        android:id="@+id/id_privacy_spinner_edit"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/id_name_spinner_edit"
+        android:textAlignment="center"
+        android:background="@drawable/text_area">
+    </Spinner>
+
+    <Spinner
+        android:id="@+id/id_duration_spinner_edit"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/id_privacy_spinner_edit"
+        android:textAlignment="center"
+        android:background="@drawable/text_area">
+
+    </Spinner>
+
+    <EditText
+        android:id="@+id/id_heading_editText_edit"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/id_duration_spinner_edit"
+        android:textAlignment="center"
+        android:background="@drawable/text_area"
+        android:hint="Enter heading of your post"/>
+
+
+    <Button
+        android:id="@+id/id_next_button_edit"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/happy_button"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/post_button_text"
+        android:textColor="@color/happyText"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/id_duration_spinner_edit"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="16dp" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "113312607424",
+    "firebase_url": "https://moodblog-database.firebaseio.com",
+    "project_id": "moodblog-database",
+    "storage_bucket": "moodblog-database.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:113312607424:android:3535520735aba0e6",
+        "android_client_info": {
+          "package_name": "com.nguyen.moodblog"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "113312607424-6gh3a5i644pap9a2rle7vcv78oqeb9km.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nguyen.moodblog",
+            "certificate_hash": "e9ecd57376ea9065463230fe873f58aabcdbbf9b"
+          }
+        },
+        {
+          "client_id": "113312607424-lgrvqatkv0mjq9tea2d2b1rblhnu7c9n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvPL8jsU56I1KlkltA2vp9NLREUiyPn5Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "113312607424-lgrvqatkv0mjq9tea2d2b1rblhnu7c9n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

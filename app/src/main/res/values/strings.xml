@@ -1,0 +1,52 @@
+<resources>
+    <string name="app_name">Mood Blog</string>
+    <string name="sign_in_button">Sign In</string>
+    <string name="register_button">Register</string>
+    <string name="register_signIn_Button">Register</string>
+    <string name="name_label">Your name</string>
+    <string name="enter_your_name">Enter your name</string>
+    <string name="user_id_label">User ID</string>
+    <string name="enter_user_id">Enter user ID</string>
+    <string name="password_label">Password</string>
+    <string name="enter_password">Enter password</string>
+    <string name="password_confirmation_label">Confirm password</string>
+    <string name="enter_password_again">Enter password again</string>
+    <string name="error_invalid_password">Password too short or does not match</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="error_invalid_email">This userID is invalid</string>
+    <string name="happy_button_text">Happy</string>
+    <string name="loved_button_text">Loved</string>
+    <string name="nervous_button_text">Nervous</string>
+    <string name="greet_users">How do you feel today?</string>
+    <string name="edit_title">Edit</string>
+    <string name="compose_title">Compose your post</string>
+    <string name="post_button_text">Post</string>
+    <string name="appear_as">Appear As</string>
+    <string name="comment_title">Comments</string>
+    <string name="old_posts">Old Posts</string>
+    <string name="your_post">Your Posts</string>
+
+
+    <string-array name="appear_as">
+        <item>Appear As...</item>
+        <item>Your name</item>
+        <item>Anonymous</item>
+    </string-array>
+
+    <string-array name="privacy">
+        <item>Privacy...</item>
+        <item>Only you</item>
+        <item>Public</item>
+    </string-array>
+
+    <string-array name="duration">
+        <item>Duration...</item>
+        <item>1 hour</item>
+        <item>3 hours</item>
+        <item>6 hours</item>
+        <item>12 hours</item>
+        <item>18 hours</item>
+        <item>24 hours</item>
+    </string-array>
+
+</resources>

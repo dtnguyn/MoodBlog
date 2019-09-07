@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="signInButton">#61c637</color>
+    <color name="registerButton">#ff5757</color>
+    <color name="signInButtonBackground">#196d24</color>
+    <color name="registerButtonBackground">#9b1a1a</color>
+    <color name="textArea">#d9d9d9</color>
+    <color name="registerAndSignInText">#737373</color>
+    <color name="happyButton">#ffbd59</color>
+    <color name="happyText">#dd5704</color>
+    <color name="loveButton">#ff5757</color>
+    <color name="loveText">#9b1a1a</color>
+    <color name="nervousButton">#3fc1c9</color>
+    <color name="nervousText">#157c80</color>
+    <color name="sadButton">#364f6b</color>
+    <color name="sadText">#6087b2</color>
+    <color name="tiredButton">#e4d1d3</color>
+    <color name="tiredText">#bd9ea1</color>
+    <color name="angryButton">#dd0a35</color>
+    <color name="angryText">#000000</color>
+    <color name="excitedButton">#1687a7</color>
+    <color name="excitedText">#a8dfe1</color>
+    <color name="confusedButton">#014955</color>
+    <color name="confusedText">#1c7180</color>
+    <color name="cardViewColor">#eff0f2</color>
+    <color name="commentColor">#d9d9d9</color>
+    <color name="maleBar">#216583</color>
+    <color name="maleText">#293462</color>
+    <color name="femaleBar">#f76262</color>
+    <color name="femaleText">#fff1c1</color>
+    <color name="iconUnselected">#a6a6a6</color>
+    <color name="iconSelectedTabOne">#ff5959</color>
+    <color name="iconSelectedTabTwo">#facf5a</color>
+    <color name="iconSelectedTabThree">#49beb7</color>
+    <color name="oldPostsButton">#ff9a00</color>
+    <color name="moodProgressButton">#ff165d</color>
+    <color name="appSettingsButton">#f6f7d7</color>
+    <color name="userSettingsButton">#3ec1d3</color>
+    <color name="settingsCardView">#d9d9d9</color>
+
+</resources>
