@@ -33,6 +33,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:text="Name"
+                    android:textColor="?attr/textColor"
                     android:textSize="20sp" />
 
                 <LinearLayout
@@ -46,6 +47,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:text="Comment"
+                        android:textColor="?attr/textColor"
                         android:textSize="16sp" />
 
 
@@ -61,6 +63,7 @@
                 android:layout_marginRight="8dp"
                 android:gravity="end"
                 android:text="date"
+                android:textColor="?attr/textColor"
                 android:textAlignment="textEnd" />
 
         </LinearLayout>

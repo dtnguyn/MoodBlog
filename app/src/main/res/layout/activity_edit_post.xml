@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/backgroundColor"
     tools:context=".ActivityEditPost">
 
     <TextView
@@ -13,7 +14,7 @@
         android:layout_marginTop="8dp"
         android:fontFamily="@font/glass_antiqua"
         android:text="@string/edit_title"
-        android:textColor="@color/black"
+        android:textColor="?attr/textColor"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +47,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView"
         tools:layout_editor_absoluteX="8dp"
         android:textAlignment="center"
-        android:background="@drawable/text_area">
+        android:background="@drawable/spinner_background">
     </Spinner>
 
     <Spinner
@@ -58,7 +59,7 @@
         android:layout_marginRight="8dp"
         app:layout_constraintTop_toBottomOf="@+id/id_name_spinner_edit"
         android:textAlignment="center"
-        android:background="@drawable/text_area">
+        android:background="@drawable/spinner_background">
     </Spinner>
 
     <Spinner
@@ -70,7 +71,7 @@
         android:layout_marginRight="8dp"
         app:layout_constraintTop_toBottomOf="@+id/id_privacy_spinner_edit"
         android:textAlignment="center"
-        android:background="@drawable/text_area">
+        android:background="@drawable/spinner_background">
 
     </Spinner>
 
@@ -83,6 +84,8 @@
         android:layout_marginRight="8dp"
         app:layout_constraintTop_toBottomOf="@+id/id_duration_spinner_edit"
         android:textAlignment="center"
+        android:textColor="?attr/textColor"
+        android:textColorHint="?attr/textColor"
         android:background="@drawable/text_area"
         android:hint="Enter heading of your post"/>
 

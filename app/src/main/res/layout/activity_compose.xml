@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ActivityCompose"
-    android:background="@color/white">
+    android:background="?attr/backgroundColor">
 
     <TextView
         android:id="@+id/textView"
@@ -15,7 +15,7 @@
         android:layout_marginTop="8dp"
         android:fontFamily="@font/glass_antiqua"
         android:text="@string/compose_title"
-        android:textColor="@color/black"
+        android:textColor="?attr/textColor"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,7 +30,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        app:cardBackgroundColor="@color/cardViewColor"
+        app:cardBackgroundColor="?attr/cardBackgroundColor"
         app:cardCornerRadius="15dp"
         app:layout_constraintBottom_toTopOf="@+id/id_next_button_compose"
         app:layout_constraintTop_toBottomOf="@+id/textView"
@@ -64,6 +64,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:text="Name"
+                        android:textColor="?attr/textColor"
                         android:textSize="24sp" />
 
                     <TextView
@@ -72,7 +73,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:text="is feeling something"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:textColor="?attr/textColor"/>
                 </LinearLayout>
                 <EditText
                     android:id="@+id/id_user_tags"
@@ -81,8 +83,10 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="30dp"
                     android:gravity="center"
-                    android:background="@drawable/text_area_white"
-                    android:hint="#tag1#tag2#tag3" />
+                    android:background="@drawable/text_area"
+                    android:hint="#tag1#tag2#tag3"
+                    android:textColorHint="?attr/textColor"
+                    android:textColor="?attr/textColor"/>
 
             </LinearLayout>
 
@@ -92,7 +96,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
-                app:cardBackgroundColor="@color/white"
+                app:cardBackgroundColor="?attr/textAreaColor"
                 app:cardCornerRadius="15dp">
 
                 <EditText
@@ -100,9 +104,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="16dp"
-                    android:background="@drawable/text_area_white"
+                    android:background="?attr/textAreaColor"
                     android:gravity="top"
-                    android:hint="Write about your day" />
+                    android:hint="Write about your day"
+                    android:textColorHint="?attr/textColor"
+                    android:textColor="?attr/textColor"/>
             </androidx.cardview.widget.CardView>
 
         </LinearLayout>

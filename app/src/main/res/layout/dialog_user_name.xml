@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/cardBackgroundColor">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change your user name to..."
+        android:textColor="?attr/textColor"
+        android:fontFamily="@font/montserrat_bold"
+        android:textSize="18sp"
+        android:layout_margin="8dp"
+        android:layout_gravity="center_horizontal"/>
+
+    <EditText
+        android:id="@+id/new_user_name"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="3dp"
+        android:textSize="18sp"
+        android:fontFamily="@font/montserrat_bold"
+        android:textColor="?attr/textColor"
+        android:hint="Enter your new user name"
+        android:textColorHint="@color/registerAndSignInText" />
+
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:textSize="14sp"
+        android:textColor="@color/happyButton"
+        android:fontFamily="@font/montserrat_bold"
+        android:background="@drawable/transparent_button"
+        android:layout_gravity="right"/>
+
+</LinearLayout>

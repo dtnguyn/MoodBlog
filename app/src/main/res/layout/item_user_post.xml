@@ -15,7 +15,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        app:cardBackgroundColor="@color/cardViewColor"
+        app:cardBackgroundColor="?attr/cardBackgroundColor"
         app:cardCornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,6 +50,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:text="Name"
+                        android:textColor="?attr/textColor"
                         android:textSize="20sp" />
 
                     <LinearLayout
@@ -63,6 +64,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:text="is feeling something"
+                            android:textColor="?attr/textColor"
                             android:textSize="16sp" />
 
                         <TextView
@@ -71,7 +73,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="8dp"
                             android:layout_marginBottom="0dp"
-
+                            android:textColor="?attr/textColor"
                             android:hint="#tag" />
 
                     </LinearLayout>
@@ -86,6 +88,7 @@
                     android:layout_marginRight="8dp"
                     android:gravity="end"
                     android:text="date"
+                    android:textColor="?attr/textColor"
                     android:textAlignment="textEnd" />
 
             </LinearLayout>
@@ -103,7 +106,7 @@
                 android:text="User's heading"
                 android:textStyle="italic"
                 android:textAlignment="textStart"
-                android:textColor="@color/black"
+                android:textColor="?attr/textColor"
                 android:textSize="22sp" />
 
             <TextView
@@ -116,7 +119,7 @@
                 android:layout_marginBottom="8dp"
                 android:fontFamily="@font/lato"
                 android:text="User's writing"
-                android:textColor="@color/black"
+                android:textColor="?attr/textColor"
                 android:textSize="18sp" />
 
             <LinearLayout
@@ -143,6 +146,7 @@
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="5dp"
                     android:text="23"
+                    android:textColor="?attr/textColor"
                     android:textSize="16sp" />
 
                 <TextView
@@ -153,6 +157,7 @@
                     android:gravity="end"
                     android:text="Comment"
                     android:layout_marginTop="6dp"
+                    android:textColor="?attr/textColor"
                     android:textAlignment="textEnd" />
 
 

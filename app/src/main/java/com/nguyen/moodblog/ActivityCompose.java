@@ -1,9 +1,11 @@
 package com.nguyen.moodblog;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -45,6 +47,12 @@ public class ActivityCompose extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences prefs = getSharedPreferences(ActivityMain.MY_PREFS_NAME, MODE_PRIVATE);
+        if(prefs.getString(ActivityAppSettings.THEME_KEY, "light").equals("dark")){
+            setTheme(R.style.DarkTheme);
+        }else {
+            setTheme(R.style.AppTheme);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compose);
 
@@ -145,5 +153,16 @@ public class ActivityCompose extends AppCompatActivity {
                 ActivityEditPost.setPostButtonStyle(R.color.confusedText, R.drawable.confused_button);
                 break;
         }
+    }
+
+    @Override
+    protected void onResume() {
+        SharedPreferences prefs = getSharedPreferences(ActivityMain.MY_PREFS_NAME, MODE_PRIVATE);
+        if(prefs.getString(ActivityAppSettings.THEME_KEY, "light").equals("dark")){
+            setTheme(R.style.DarkTheme);
+        }else {
+            setTheme(R.style.AppTheme);
+        }
+        super.onResume();
     }
 }

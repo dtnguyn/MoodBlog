@@ -67,6 +67,13 @@ public class AdapterRecyclerViewSettings extends RecyclerView.Adapter<AdapterRec
             case 3:
                 mySettingsViewHolder.settingIcon.setImageResource(R.drawable.settings);
                 mySettingsViewHolder.cardView.setCardBackgroundColor(mContext.getResources().getColor(R.color.userSettingsButton));
+                mySettingsViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(mContext, ActivityUserSettings.class);
+                        mContext.startActivity(intent);
+                    }
+                });
                 break;
         }
 

@@ -1,19 +1,33 @@
 package com.nguyen.moodblog;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
 
+
 public class ActivityBlog extends AppCompatActivity {
+    //Constant variable
+    private final int DAILY_NOTIFICATION_ID = 1;
+    private final int LIKE_COMMENT_NOTIFICATION_ID = 2;
+
+    //Static variable
+    public final static long NOTIFICATION_PERIOD = 900000;
+
 
     private TabLayout mTabLayout;
     private AppBarLayout mAppBarLayout;
@@ -24,6 +38,14 @@ public class ActivityBlog extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences.Editor editor = getSharedPreferences(ActivityMain.MY_PREFS_NAME, MODE_PRIVATE).edit();
+        SharedPreferences prefs = getSharedPreferences(ActivityMain.MY_PREFS_NAME, MODE_PRIVATE);
+        if(prefs.getString(ActivityAppSettings.THEME_KEY, "light").equals("dark")){
+            setTheme(R.style.DarkTheme);
+        }else {
+            setTheme(R.style.AppTheme);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blog);
 
@@ -31,6 +53,16 @@ public class ActivityBlog extends AppCompatActivity {
         mAppBarLayout = findViewById(R.id.appBar);
         mViewPager = findViewById(R.id.viewpaper);
 
+
+        String reverseValue = prefs.getString(NotificationBackgroundService.DAILY_NOTIFICATION_UPDATE_KEY, "null");
+
+        editor.putString(NotificationBackgroundService.DAILY_NOTIFICATION_UPDATE_KEY, "true");
+        editor.apply();
+
+        scheduleNotification();
+
+        editor.putString(NotificationBackgroundService.DAILY_NOTIFICATION_UPDATE_KEY, reverseValue);
+        editor.apply();
 
         AdapterViewPaper adapter = new AdapterViewPaper(getSupportFragmentManager());
         adapter.AddFragment(new FragmentMenuPost(this), "");
@@ -91,10 +123,47 @@ public class ActivityBlog extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+
     @Override
-    protected void onResumeFragments() {
-        super.onResumeFragments();
+    protected void onResume() {
+        Log.d("MoodBlog","calledddddd");
+        SharedPreferences prefs = getSharedPreferences(ActivityMain.MY_PREFS_NAME, MODE_PRIVATE);
+        if(prefs.getString(ActivityAppSettings.THEME_KEY, "light").equals("dark")){
+            setTheme(R.style.DarkTheme);
+        }else {
+            setTheme(R.style.AppTheme);
+        }
+        super.onResume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    public void scheduleNotification(){
+
+        ComponentName componentName = new ComponentName(this, NotificationBackgroundService.class);
+        JobInfo jobInfo = new JobInfo.Builder(DAILY_NOTIFICATION_ID, componentName)
+                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)
+                .setPersisted(true)
+                .setPeriodic(NOTIFICATION_PERIOD)
+                .build();
+
+
+        JobScheduler jobScheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+        jobScheduler.schedule(jobInfo);
+
 
     }
+
+//    public void scheduleLikeAndCommentNotification(){
+//        ComponentName componentName = new ComponentName(this, NotificationBackgroundService.class);
+//
+//
+//        JobScheduler jobScheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+//        jobScheduler.schedule(likeAndCommentsNotificationJobInfo);
+//    }
 }
 

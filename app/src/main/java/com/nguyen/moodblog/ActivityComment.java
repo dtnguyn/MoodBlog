@@ -2,10 +2,12 @@ package com.nguyen.moodblog;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -61,6 +63,13 @@ public class ActivityComment extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences prefs = getSharedPreferences(ActivityMain.MY_PREFS_NAME, MODE_PRIVATE);
+        if(prefs.getString(ActivityAppSettings.THEME_KEY, "light").equals("dark")){
+            setTheme(R.style.DarkTheme);
+        }else {
+            setTheme(R.style.AppTheme);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
 
@@ -198,6 +207,7 @@ public class ActivityComment extends AppCompatActivity {
                         mRecyclerView.setAdapter(commentAdapter);
                         new Toast(v.getContext()).makeText(v.getContext(), "Comment posted successfully", Toast.LENGTH_SHORT).show();
                     }
+                    commentArea.setText("");
                 }
             }
         });
@@ -228,6 +238,17 @@ public class ActivityComment extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    protected void onResume() {
+        SharedPreferences prefs = getSharedPreferences(ActivityMain.MY_PREFS_NAME, MODE_PRIVATE);
+        if(prefs.getString(ActivityAppSettings.THEME_KEY, "light").equals("dark")){
+            setTheme(R.style.DarkTheme);
+        }else {
+            setTheme(R.style.AppTheme);
+        }
+        super.onResume();
     }
 
 

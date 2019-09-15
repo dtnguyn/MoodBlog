@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
-    android:background="@color/textArea"
+    android:background="?attr/commentColor"
     android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:rowCount="4"
         android:columnCount="3"
-        android:background="@color/textArea">
+        android:background="?attr/commentColor">
 
         <ImageView
             android:id="@+id/male_1_icon"
@@ -37,7 +37,7 @@
             android:layout_marginLeft="6dp"
             android:layout_marginTop="6dp"
             android:layout_marginRight="6dp"
-            android:onClick="iconPicked"/>
+            android:onClick="iconPicked" />
         <ImageView
             android:id="@+id/male_2_icon"
             android:layout_width="70dp"
@@ -133,7 +133,7 @@
     <GridLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/textArea"
+        android:background="?attr/commentColor"
         android:rowCount="4"
         android:columnCount="3">
 

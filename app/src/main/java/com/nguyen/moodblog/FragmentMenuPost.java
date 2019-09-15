@@ -2,6 +2,7 @@ package com.nguyen.moodblog;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -55,6 +57,12 @@ public class FragmentMenuPost extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        SharedPreferences prefs = getActivity().getSharedPreferences(ActivityMain.MY_PREFS_NAME, getContext().MODE_PRIVATE);
+        if(prefs.getString(ActivityAppSettings.THEME_KEY, "light").equals("dark")){
+            getContext().setTheme(R.style.DarkTheme);
+        }else {
+            getContext().setTheme(R.style.AppTheme);
+        }
         super.onCreate(savedInstanceState);
         Calendar calendar = Calendar.getInstance();
         String currentDate = DateFormat.getDateInstance(DateFormat.MEDIUM).format(calendar.getTime());
@@ -70,5 +78,16 @@ public class FragmentMenuPost extends Fragment {
         mMenuButtons.add(new MenuButton(mContext,"Excited", R.drawable.excited_button, R.font.diarygirl, R.color.excitedText));
         mMenuButtons.add(new MenuButton(mContext,"Tired", R.drawable.tired_button, R.font.firasansbold, R.color.tiredText));
         mMenuButtons.add(new MenuButton(mContext,"Confused", R.drawable.confused_button, R.font.sedgwickave, R.color.confusedText));
+    }
+
+    @Override
+    public void onResume() {
+        SharedPreferences prefs = getActivity().getSharedPreferences(ActivityMain.MY_PREFS_NAME, getContext().MODE_PRIVATE);
+        if(prefs.getString(ActivityAppSettings.THEME_KEY, "light").equals("dark")){
+            getContext().setTheme(R.style.DarkTheme);
+        }else {
+            getContext().setTheme(R.style.AppTheme);
+        }
+        super.onResume();
     }
 }

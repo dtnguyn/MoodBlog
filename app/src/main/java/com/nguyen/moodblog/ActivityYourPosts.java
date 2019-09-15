@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -17,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import static java.lang.Integer.parseInt;
@@ -27,6 +30,7 @@ public class ActivityYourPosts extends AppCompatActivity {
 
     //Member Variables
     List<UserPost> mUserPosts;
+
 
     //UI elements
     RecyclerView mRecyclerView;
@@ -40,8 +44,21 @@ public class ActivityYourPosts extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences prefs = getSharedPreferences(ActivityMain.MY_PREFS_NAME, MODE_PRIVATE);
+        if(prefs.getString(ActivityAppSettings.THEME_KEY, "light").equals("dark")){
+            setTheme(R.style.DarkTheme);
+        }else {
+            setTheme(R.style.AppTheme);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_your_posts);
+
+
+
+
+
+
 
         //Set up the post list
         mUserPosts = new ArrayList<>();
@@ -64,6 +81,19 @@ public class ActivityYourPosts extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String userID = mAuth.getCurrentUser().getUid();
+                //When the user get on this activity, the number of likes and comments will be updated
+                if(dataSnapshot.child("users").child(userID).child("posts").getValue() != null) {
+                    long latestPostIndex = dataSnapshot.child("users").child(userID).child("posts").getChildrenCount() - 1;
+                    if (dataSnapshot.child("users").child(userID).child("posts").child("" + latestPostIndex).getValue(UserPost.class).getDeletionTime().after(Calendar.getInstance().getTime())) {
+                        int numberOfLikes = dataSnapshot.child("users").child(userID).child("posts").child("" + latestPostIndex).getValue(UserPost.class).getNumberOfLikes();
+                        int numberOfComments = (int) dataSnapshot.child("users").child(userID).child("posts").child("" + latestPostIndex).child("comments").getChildrenCount();
+                        //Save the update
+                        SharedPreferences.Editor editor = getSharedPreferences(ActivityMain.MY_PREFS_NAME, MODE_PRIVATE).edit();
+                        editor.putInt(NotificationBackgroundService.LIKE_UPDATE_KEY, numberOfLikes);
+                        editor.putInt(NotificationBackgroundService.COMMENT_UPDATE_KEY, numberOfComments);
+                        editor.apply();
+                    }
+                }
                 if(dataSnapshot.child("users").child(userID).child("posts").getValue() != null){
                     List <String> likePosts;
                     for(int i = (int) dataSnapshot.child("users").child(userID).child("posts").getChildrenCount() - 1; i >= 0 ; i--){
@@ -115,8 +145,16 @@ public class ActivityYourPosts extends AppCompatActivity {
 
     }
 
+
     @Override
     protected void onResume() {
+        SharedPreferences prefs = getSharedPreferences(ActivityMain.MY_PREFS_NAME, MODE_PRIVATE);
+        if(prefs.getString(ActivityAppSettings.THEME_KEY, "light").equals("dark")){
+            setTheme(R.style.DarkTheme);
+        }else {
+            setTheme(R.style.AppTheme);
+        }
+        super.onResume();
         super.onResume();
         if(currentUserPostKey != null){
             mUserPosts.get(mUserPosts.size() - 1 - parseInt(currentUserPostKey)).getLikeButton().callOnClick();

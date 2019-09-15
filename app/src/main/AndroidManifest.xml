@@ -3,13 +3,15 @@
     package="com.nguyen.moodblog">
 
     <application
+        android:name=".NotificationChannelCreator"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ActivityAppSettings"></activity>
+        <activity android:name=".ActivityUserSettings"></activity>
+        <activity android:name=".ActivityAppSettings" />
         <activity android:name=".ActivityYourPosts" />
         <activity android:name=".ActivityCompose" />
         <activity android:name=".ActivityEditPost" />
@@ -24,6 +26,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver android:name=".NotificationReceiver" />
+
+        <service
+            android:name=".NotificationBackgroundService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
     </application>
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
 </manifest>

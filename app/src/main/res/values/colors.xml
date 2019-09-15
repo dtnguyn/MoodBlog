@@ -28,7 +28,9 @@
     <color name="confusedButton">#014955</color>
     <color name="confusedText">#1c7180</color>
     <color name="cardViewColor">#eff0f2</color>
+    <color name="cardViewDarkColor">#545454</color>
     <color name="commentColor">#d9d9d9</color>
+    <color name="commentDarkColor">#3b3a3a</color>
     <color name="maleBar">#216583</color>
     <color name="maleText">#293462</color>
     <color name="femaleBar">#f76262</color>
@@ -42,5 +44,8 @@
     <color name="appSettingsButton">#f6f7d7</color>
     <color name="userSettingsButton">#3ec1d3</color>
     <color name="settingsCardView">#d9d9d9</color>
+    <color name="textDarkColor">#d9d9d9</color>
+
+
 
 </resources>

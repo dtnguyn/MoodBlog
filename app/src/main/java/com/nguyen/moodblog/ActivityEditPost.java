@@ -2,8 +2,10 @@ package com.nguyen.moodblog;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -55,6 +57,10 @@ public class ActivityEditPost extends AppCompatActivity implements AdapterView.O
     private FirebaseDatabase mFirebaseDatabase;
     private FirebaseAuth mAuth;
     private DatabaseReference myRef;
+
+    //SharedPreferences variable
+    private SharedPreferences prefs;
+    private SharedPreferences.Editor editor;
 
     //Getters
 
@@ -127,6 +133,18 @@ public class ActivityEditPost extends AppCompatActivity implements AdapterView.O
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Set up the SharedPreferences variable
+        editor = getSharedPreferences(ActivityMain.MY_PREFS_NAME, MODE_PRIVATE).edit();
+        prefs = getSharedPreferences(ActivityMain.MY_PREFS_NAME, MODE_PRIVATE);
+
+        //Initialize the theme
+        if(prefs.getString(ActivityAppSettings.THEME_KEY, "light").equals("dark")){
+            setTheme(R.style.DarkTheme);
+        }else {
+            setTheme(R.style.AppTheme);
+        }
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_post);
 
@@ -193,16 +211,17 @@ public class ActivityEditPost extends AppCompatActivity implements AdapterView.O
 
                     //Spinner 1 selection
                     String itemSelectedSpinnerOne = (String) nameSpinner.getSelectedItem();
-                    if(itemSelectedSpinnerOne.equals("Anonymous")){
-                        mUserName = itemSelectedSpinnerOne;
+                    if(itemSelectedSpinnerOne.equals("Anonymous") ||
+                            (itemSelectedSpinnerOne.equals("Appear As...") && prefs.getString(ActivityUserSettings.DEFAULT_APPEAR_KEY, "Your name").equals("Anonymous"))){
+                        mUserName = "Anonymous";
                         mUserIconResourceID = R.drawable.unknown;
                     }
-
                     UserPost userPost = new UserPost(v, mUserName, mUserMood, mUserTags, mUserPostHeading, mUserPostBody, currentDate, mUserIconResourceID);
 
                     //Spinner 2 selection
                     String itemSelectedSpinnerTwo = (String) privacySpinner.getSelectedItem();
-                    if(itemSelectedSpinnerTwo.equals("Only you")){
+                    if(itemSelectedSpinnerTwo.equals("Only you") || (
+                            prefs.getString(ActivityUserSettings.DEFAULT_PRIVACY_KEY, "Public").equals("Only you") && itemSelectedSpinnerTwo.equals("Privacy..."))){
                         userPost.setOnlyOwner(true);
                     }
 
@@ -229,7 +248,8 @@ public class ActivityEditPost extends AppCompatActivity implements AdapterView.O
                             userPost.setDeletionTime(addHoursToDate(deletionTime, 24));
                             break;
                         default:
-                            userPost.setDeletionTime(addHoursToDate(deletionTime, 24));
+                            int hours = prefs.getInt(ActivityUserSettings.DEFAULT_DURATION_KEY, 24);
+                            userPost.setDeletionTime(addHoursToDate(deletionTime, hours));
                             break;
                     }
 
@@ -240,15 +260,23 @@ public class ActivityEditPost extends AppCompatActivity implements AdapterView.O
                     userPost.setOwnerID(userID);
                     userPost.setPostID(UUID.randomUUID().toString());
 
+
                     mUserPosts.add(userPost);
                     mCurrentUserPosts.add(userPost);
 
                     myRef.child("posts").setValue(mUserPosts);
                     myRef.child("users").child(userID).child("posts").setValue(mCurrentUserPosts);
 
+                    //Update the latest post so that the like and comment notification can follow this post
+                    SharedPreferences.Editor editor = getSharedPreferences(ActivityMain.MY_PREFS_NAME, MODE_PRIVATE).edit();
+                    editor.putInt(NotificationBackgroundService.LIKE_UPDATE_KEY, 0);
+                    editor.putInt(NotificationBackgroundService.COMMENT_UPDATE_KEY, 0);
+                    editor.apply();
 
                     Intent intent = new Intent(ActivityEditPost.this, ActivityBlog.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
+
                 }
             }
         });
@@ -258,13 +286,13 @@ public class ActivityEditPost extends AppCompatActivity implements AdapterView.O
     }
 
     private void setUpSpinner(){
-        final ArrayAdapter<CharSequence> nameSpinnerAdapter = ArrayAdapter.createFromResource(this, R.array.appear_as, android.R.layout.simple_spinner_item);
-        ArrayAdapter<CharSequence> privacySpinnerAdapter = ArrayAdapter.createFromResource(this, R.array.privacy, android.R.layout.simple_spinner_item);
-        ArrayAdapter<CharSequence> durationSpinnerAdapter = ArrayAdapter.createFromResource(this, R.array.duration, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> nameSpinnerAdapter = ArrayAdapter.createFromResource(this, R.array.appear_as, R.layout.spinner_selected_view);
+        ArrayAdapter<CharSequence> privacySpinnerAdapter = ArrayAdapter.createFromResource(this, R.array.privacy, R.layout.spinner_selected_view);
+        ArrayAdapter<CharSequence> durationSpinnerAdapter = ArrayAdapter.createFromResource(this, R.array.duration, R.layout.spinner_selected_view);
 
-        nameSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        privacySpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        durationSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        nameSpinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_menu);
+        privacySpinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_menu);
+        durationSpinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_menu);
 
         nameSpinner.setAdapter(nameSpinnerAdapter);
         privacySpinner.setAdapter(privacySpinnerAdapter);
@@ -293,9 +321,22 @@ public class ActivityEditPost extends AppCompatActivity implements AdapterView.O
 
     }
 
+
+
     @Override
     public void finish() {
         super.finish();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
+
+    @Override
+    protected void onResume() {
+        SharedPreferences prefs = getSharedPreferences(ActivityMain.MY_PREFS_NAME, MODE_PRIVATE);
+        if(prefs.getString(ActivityAppSettings.THEME_KEY, "light").equals("dark")){
+            setTheme(R.style.DarkTheme);
+        }else {
+            setTheme(R.style.AppTheme);
+        }
+        super.onResume();
     }
 }

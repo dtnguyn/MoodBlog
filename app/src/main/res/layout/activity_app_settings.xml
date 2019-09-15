@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="?attr/backgroundColor"
     tools:context=".ActivityAppSettings">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,7 +19,7 @@
             android:layout_marginTop="8dp"
             android:fontFamily="@font/glass_antiqua"
             android:text="App Settings"
-            android:textColor="@color/black"
+            android:textColor="?attr/textColor"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +27,7 @@
             app:layout_goneMarginTop="20dp" />
 
         <Button
-            android:id="@+id/id_back_button_yourPost"
+            android:id="@+id/id_back_button_app_settings"
             android:layout_width="79dp"
             android:layout_height="32dp"
             android:layout_marginEnd="8dp"
@@ -46,14 +47,16 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Notification"
+        android:textColor="?attr/textColor"
         android:textSize="18sp"
         android:fontFamily="@font/montserrat_bold"
         android:layout_marginLeft="14dp"/>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/notification_cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/settingsCardView"
+        app:cardBackgroundColor="?attr/cardSettingsBackgroundColor"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         app:cardCornerRadius="20dp"
@@ -80,13 +83,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Normal"
+                        android:textColor="?attr/textColor"
                         android:textSize="18sp"
                         android:fontFamily="@font/montserrat_bold"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="send all the necessary notifications"/>
+                        android:text="send all the necessary notifications"
+                        android:textColor="?attr/textColor"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -95,6 +100,7 @@
                     android:gravity="right">
 
                     <ImageView
+                        android:id="@+id/notification_normal"
                         android:layout_width="46dp"
                         android:layout_height="46dp"
                         android:src="@drawable/light_picked"
@@ -132,13 +138,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Less"
+                        android:textColor="?attr/textColor"
                         android:textSize="18sp"
                         android:fontFamily="@font/montserrat_bold"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="send notification occasionally"/>
+                        android:text="send notification occasionally"
+                        android:textColor="?attr/textColor"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -147,6 +155,7 @@
                     android:gravity="right">
 
                     <ImageView
+                        android:id="@+id/notification_less"
                         android:layout_width="46dp"
                         android:layout_height="46dp"
                         android:src="@drawable/light_unpicked"
@@ -180,13 +189,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Blocked"
+                        android:textColor="?attr/textColor"
                         android:textSize="18sp"
                         android:fontFamily="@font/montserrat_bold"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="send no notification"/>
+                        android:text="send no notification"
+                        android:textColor="?attr/textColor"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -195,6 +206,7 @@
                     android:gravity="right">
 
                     <ImageView
+                        android:id="@+id/notification_none"
                         android:layout_width="46dp"
                         android:layout_height="46dp"
                         android:src="@drawable/light_unpicked"
@@ -214,14 +226,16 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="App Theme"
+        android:textColor="?attr/textColor"
         android:textSize="18sp"
         android:fontFamily="@font/montserrat_bold"
         android:layout_marginLeft="14dp"/>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/theme_cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/settingsCardView"
+        app:cardBackgroundColor="?attr/cardSettingsBackgroundColor"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         app:cardCornerRadius="20dp"
@@ -243,6 +257,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:text="Light"
+                    android:textColor="?attr/textColor"
                     android:fontFamily="@font/montserrat_bold"
                     android:textSize="18sp"/>
 
@@ -252,6 +267,7 @@
                     android:gravity="right">
 
                     <ImageView
+                        android:id="@+id/light_mode"
                         android:layout_width="46dp"
                         android:layout_height="46dp"
                         android:src="@drawable/light_picked"
@@ -282,6 +298,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="14dp"
                     android:text="Dark"
+                    android:textColor="?attr/textColor"
                     android:fontFamily="@font/montserrat_bold"
                     android:textSize="20sp"/>
 
@@ -291,6 +308,7 @@
                     android:gravity="right">
 
                     <ImageView
+                        android:id="@+id/dark_mode"
                         android:layout_width="46dp"
                         android:layout_height="46dp"
                         android:src="@drawable/dark_unpicked"

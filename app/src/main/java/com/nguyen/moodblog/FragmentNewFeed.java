@@ -1,6 +1,7 @@
 package com.nguyen.moodblog;
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -49,6 +51,17 @@ public class FragmentNewFeed extends Fragment {
 
     public FragmentNewFeed(){
 
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        SharedPreferences prefs = getActivity().getSharedPreferences(ActivityMain.MY_PREFS_NAME, getContext().MODE_PRIVATE);
+        if(prefs.getString(ActivityAppSettings.THEME_KEY, "light").equals("dark")){
+            getContext().setTheme(R.style.DarkTheme);
+        }else {
+            getContext().setTheme(R.style.AppTheme);
+        }
+        super.onCreate(savedInstanceState);
     }
 
     @Nullable
@@ -166,6 +179,12 @@ public class FragmentNewFeed extends Fragment {
 
     @Override
     public void onResume() {
+        SharedPreferences prefs = getActivity().getSharedPreferences(ActivityMain.MY_PREFS_NAME, getContext().MODE_PRIVATE);
+        if(prefs.getString(ActivityAppSettings.THEME_KEY, "light").equals("dark")){
+            getContext().setTheme(R.style.DarkTheme);
+        }else {
+            getContext().setTheme(R.style.AppTheme);
+        }
         super.onResume();
         if(postKey != null){
             mUserPosts.get(mUserPosts.size() - 1 - parseInt(postKey)).getLikeButton().callOnClick();

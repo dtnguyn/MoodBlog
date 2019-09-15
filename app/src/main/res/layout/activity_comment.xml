@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/backgroundColor"
     tools:context=".ActivityComment">
 
 
@@ -16,7 +17,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        app:cardBackgroundColor="@color/cardViewColor"
+        app:cardBackgroundColor="?attr/cardBackgroundColor"
         app:cardCornerRadius="15dp"
         app:layout_constraintBottom_toTopOf="@+id/id_next_button_compose"
         app:layout_constraintTop_toBottomOf="@+id/textView"
@@ -46,6 +47,7 @@
 
                     <TextView
                         android:id="@+id/id_user_name_post_commentActivity"
+                        android:textColor="?attr/textColor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -58,6 +60,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:textColor="?attr/textColor"
                             android:id="@+id/id_user_feeling_commentActivity"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -71,7 +74,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="8dp"
                             android:layout_marginBottom="0dp"
-
+                            android:textColor="?attr/textColor"
                             android:hint="#tag" />
 
                     </LinearLayout>
@@ -86,6 +89,7 @@
                     android:layout_marginRight="8dp"
                     android:gravity="end"
                     android:text="date"
+                    android:textColor="?attr/textColor"
                     android:textAlignment="textEnd" />
 
             </LinearLayout>
@@ -103,8 +107,8 @@
                 android:text="User's heading"
                 android:textStyle="italic"
                 android:textAlignment="textStart"
-                android:textColor="@color/black"
-                android:textSize="22sp" />
+                android:textSize="22sp"
+                android:textColor="?attr/textColor"/>
 
             <TextView
                 android:id="@+id/id_user_writing_commentActivity"
@@ -116,8 +120,8 @@
                 android:layout_marginBottom="8dp"
                 android:fontFamily="@font/lato"
                 android:text="User's writing"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textColor="?attr/textColor"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -143,6 +147,7 @@
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="5dp"
                     android:text="23"
+                    android:textColor="?attr/textColor"
                     android:textSize="16sp" />
 
 
@@ -151,7 +156,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:cardBackgroundColor="@color/commentColor"
+                app:cardBackgroundColor="?attr/commentColor"
                 app:cardCornerRadius="15dp">
 
                 <LinearLayout
@@ -180,7 +185,9 @@
                             android:layout_marginLeft="8dp"
                             android:paddingLeft="6dp"
                             android:paddingRight="6dp"
-                            android:hint="Add a comment"/>
+                            android:hint="Add a comment"
+                            android:textColorHint="?attr/textColor"
+                            android:textColor="?attr/textColor"/>
 
                         <Button
                             android:id="@+id/add_comment_button"
@@ -189,7 +196,8 @@
                             android:background="@drawable/comment_button"
                             android:layout_marginLeft="4dp"
                             android:layout_marginTop="4dp"
-                            android:text="Add"/>
+                            android:text="Add"
+                            android:textColor="?attr/textColor"/>
 
                     </LinearLayout>
 

@@ -151,7 +151,13 @@ public class UserPost {
         return postID;
     }
 
-
+    public int getNumberOfComments(){
+        int numberOfComments = 0;
+        if(mPostComments != null){
+            numberOfComments = mPostComments.size();
+        }
+        return numberOfComments;
+    }
 
     //Setter
     public void setUserName(String userName) {

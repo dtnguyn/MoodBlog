@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/backgroundColor"
     tools:context=".ActivityBlog"
     android:orientation="vertical">
 
@@ -29,7 +30,11 @@
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:layout_collapseMode="pin"
                 app:layout_scrollFlags="scroll|enterAlways"
-                android:background="@drawable/moodblog">
+                android:background="?attr/backgroundColor">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="300px"
+                    android:src="@drawable/moodblog"/>
             </androidx.appcompat.widget.Toolbar>
 
 
@@ -50,7 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="300px"
-            android:background="@color/white"
+            android:background="?attr/backgroundColor"
             app:tabGravity="fill"
             app:tabTextColor="@color/registerAndSignInText"
             android:scrollIndicators="start"

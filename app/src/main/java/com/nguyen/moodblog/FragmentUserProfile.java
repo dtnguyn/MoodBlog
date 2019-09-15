@@ -71,6 +71,13 @@ public class FragmentUserProfile extends Fragment {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        SharedPreferences prefs = getActivity().getSharedPreferences(ActivityMain.MY_PREFS_NAME, getContext().MODE_PRIVATE);
+        if(prefs.getString(ActivityAppSettings.THEME_KEY, "light").equals("dark")){
+            getContext().setTheme(R.style.DarkTheme);
+        }else {
+            getContext().setTheme(R.style.AppTheme);
+        }
+
         super.onCreate(savedInstanceState);
 
         mSettingItems = new ArrayList<>();
@@ -78,5 +85,14 @@ public class FragmentUserProfile extends Fragment {
         mSettingItems.add("Mood Progress");
         mSettingItems.add("App Settings");
         mSettingItems.add("User Settings");
+    }
+
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        userNameView.setText(ActivityBlog.userName);
+        avatarView.setImageResource(ActivityBlog.userIconResourceId);
     }
 }
