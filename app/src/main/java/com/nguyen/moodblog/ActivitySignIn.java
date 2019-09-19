@@ -203,7 +203,8 @@ public class ActivitySignIn extends AppCompatActivity {
                                     break;
                                 default:
                                     ActivityBlog.userIconResourceId = R.drawable.unknown;
-;                            }
+                                    break;
+                            }
                         }
 
                         @Override

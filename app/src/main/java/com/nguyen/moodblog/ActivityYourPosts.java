@@ -95,33 +95,10 @@ public class ActivityYourPosts extends AppCompatActivity {
                     }
                 }
                 if(dataSnapshot.child("users").child(userID).child("posts").getValue() != null){
-                    List <String> likePosts;
+                    List <String> likePosts = new ArrayList<>();
                     for(int i = (int) dataSnapshot.child("users").child(userID).child("posts").getChildrenCount() - 1; i >= 0 ; i--){
                         UserPost userPost = new UserPost();
-                        userPost.setUserName(dataSnapshot.child("users").child(userID).child("posts").child("" + i).getValue(UserPost.class).getUserName());
-                        userPost.setUserMood(dataSnapshot.child("users").child(userID).child("posts").child("" + i).getValue(UserPost.class).getUserMood());
-                        userPost.setUserTags(dataSnapshot.child("users").child(userID).child("posts").child("" + i).getValue(UserPost.class).getUserTags());
-                        userPost.setUserPostBody(dataSnapshot.child("users").child(userID).child("posts").child("" + i).getValue(UserPost.class).getUserPostBody());
-                        userPost.setUserPostHeading(dataSnapshot.child("users").child(userID).child("posts").child("" + i).getValue(UserPost.class).getUserPostHeading());
-                        userPost.setDate(dataSnapshot.child("users").child(userID).child("posts").child("" + i).getValue(UserPost.class).getDate());
-                        userPost.setPostKey(dataSnapshot.child("users").child(userID).child("posts").child("" + i).getValue(UserPost.class).getPostKey());
-                        userPost.setCurrentUserPostKey(dataSnapshot.child("users").child(userID).child("posts").child("" + i).getValue(UserPost.class).getCurrentUserPostKey());
-                        userPost.setNumberOfLikes(dataSnapshot.child("users").child(userID).child("posts").child("" + i).getValue(UserPost.class).getNumberOfLikes());
-                        userPost.setOwnerID(dataSnapshot.child("users").child(userID).child("posts").child("" + i).getValue(UserPost.class).getOwnerID());
-                        userPost.setUserIconResourceId(dataSnapshot.child("users").child(userID).child("posts").child("" + i).getValue(UserPost.class).getUserIconResourceId());
-                        userPost.setDeletionTime(dataSnapshot.child("users").child(userID).child("posts").child("" + i).getValue(UserPost.class).getDeletionTime());
-                        userPost.setPostID(dataSnapshot.child("users").child(userID).child("posts").child("" + i).getValue(UserPost.class).getPostID());
-
-                        if ((List<String>) dataSnapshot.child("users").child(userID).child("likedPosts").getValue() != null) {
-                            likePosts = (ArrayList<String>) dataSnapshot.child("users").child(userID).child("likedPosts").getValue();
-                            for (int j = 0; j < likePosts.size(); j++) {
-                                if (userPost.getPostID().equals(likePosts.get(j))) {
-                                    userPost.setIsLiked("true");
-                                    break;
-                                }
-                            }
-                        }
-
+                        setUpUserPost(userPost,dataSnapshot, likePosts,userID,i);
                         mUserPosts.add(userPost);
 
                     }
@@ -145,6 +122,102 @@ public class ActivityYourPosts extends AppCompatActivity {
 
     }
 
+    private void setUpUserPost(UserPost userPost, DataSnapshot dataSnapshot,List<String> likePosts, String userID, int i){
+        userPost.setUserName(dataSnapshot.child("users").child(userID).child("posts").child("" + i).getValue(UserPost.class).getUserName());
+        userPost.setUserMood(dataSnapshot.child("users").child(userID).child("posts").child("" + i).getValue(UserPost.class).getUserMood());
+        userPost.setUserTags(dataSnapshot.child("users").child(userID).child("posts").child("" + i).getValue(UserPost.class).getUserTags());
+        userPost.setUserPostBody(dataSnapshot.child("users").child(userID).child("posts").child("" + i).getValue(UserPost.class).getUserPostBody());
+        userPost.setUserPostHeading(dataSnapshot.child("users").child(userID).child("posts").child("" + i).getValue(UserPost.class).getUserPostHeading());
+        userPost.setDate(dataSnapshot.child("users").child(userID).child("posts").child("" + i).getValue(UserPost.class).getDate());
+        userPost.setPostKey(dataSnapshot.child("users").child(userID).child("posts").child("" + i).getValue(UserPost.class).getPostKey());
+        userPost.setCurrentUserPostKey(dataSnapshot.child("users").child(userID).child("posts").child("" + i).getValue(UserPost.class).getCurrentUserPostKey());
+        userPost.setNumberOfLikes(dataSnapshot.child("users").child(userID).child("posts").child("" + i).getValue(UserPost.class).getNumberOfLikes());
+        userPost.setOwnerID(dataSnapshot.child("users").child(userID).child("posts").child("" + i).getValue(UserPost.class).getOwnerID());
+        userPost.setUserIconResourceId(getUserIconFromDatabase(dataSnapshot,i));
+        userPost.setDeletionTime(dataSnapshot.child("users").child(userID).child("posts").child("" + i).getValue(UserPost.class).getDeletionTime());
+        userPost.setPostID(dataSnapshot.child("users").child(userID).child("posts").child("" + i).getValue(UserPost.class).getPostID());
+
+        //Check if the likePosts has already existed on the database or not
+        if ((List<String>) dataSnapshot.child("users").child(userID).child("likedPosts").getValue() != null) {
+            likePosts = (ArrayList<String>) dataSnapshot.child("users").child(userID).child("likedPosts").getValue();
+            for (int j = 0; j < likePosts.size(); j++) {
+                if (userPost.getPostID().equals(likePosts.get(j))) {
+                    userPost.setIsLiked("true");
+                    break;
+                }
+
+            }
+        }
+    }
+
+    //Set up userIcon
+    private int getUserIconFromDatabase(DataSnapshot dataSnapshot, int i){
+        String userID = mAuth.getCurrentUser().getUid();
+        String icon = dataSnapshot.child("users").child(userID).child("userIcon").getValue(String.class);
+        int userIconResourceID;
+        switch(icon){
+            case "m1":
+                userIconResourceID = R.drawable.male_1;
+                break;
+            case "m2":
+                userIconResourceID = R.drawable.male_2;
+                break;
+            case "m3":
+                userIconResourceID = R.drawable.male_3;
+                break;
+            case "m4":
+                userIconResourceID = R.drawable.male_4;
+                break;
+            case "m5":
+                userIconResourceID = R.drawable.male_5;
+                break;
+            case "m6":
+                userIconResourceID = R.drawable.male_6;
+                break;
+            case "m7":
+                userIconResourceID = R.drawable.male_7;
+                break;
+            case "m8":
+                userIconResourceID = R.drawable.male_8;
+                break;
+            case "m9":
+                userIconResourceID = R.drawable.male_9;
+                break;
+            case "fm1":
+                userIconResourceID = R.drawable.female_1;
+                break;
+            case "fm2":
+                userIconResourceID = R.drawable.female_2;
+                break;
+            case "fm3":
+                userIconResourceID = R.drawable.female_3;
+                break;
+            case "fm4":
+                userIconResourceID = R.drawable.female_4;
+                break;
+            case "fm5":
+                userIconResourceID = R.drawable.female_5;
+                break;
+            case "fm6":
+                userIconResourceID = R.drawable.female_6;
+                break;
+            case "fm7":
+                userIconResourceID = R.drawable.female_7;
+                break;
+            case "fm8":
+                userIconResourceID = R.drawable.female_8;
+                break;
+            case "fm9":
+                userIconResourceID = R.drawable.female_9;
+                break;
+            default:
+                userIconResourceID = R.drawable.unknown;
+                break;
+        }
+        return  userIconResourceID;
+
+    }
+
 
     @Override
     protected void onResume() {
@@ -161,4 +234,6 @@ public class ActivityYourPosts extends AppCompatActivity {
             currentUserPostKey = null;
         }
     }
+
+
 }

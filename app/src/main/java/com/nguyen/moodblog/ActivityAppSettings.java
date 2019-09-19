@@ -182,6 +182,7 @@ public class ActivityAppSettings extends AppCompatActivity {
 
         Log.d("MoodBlog", "theme changed");
         if(themeChanged){
+            ActivityBlog.tabIndex = 2;
             Intent intent = new Intent(ActivityAppSettings.this, ActivityBlog.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);

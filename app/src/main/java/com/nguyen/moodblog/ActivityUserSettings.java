@@ -98,8 +98,6 @@ public class ActivityUserSettings extends AppCompatActivity implements AdapterVi
             mOnlyYou.setImageResource(R.drawable.light_picked);
         }
 
-
-
         int defaultHour = prefs.getInt(DEFAULT_DURATION_KEY, 24);
         Log.d("MoodBlog", "default duration: " + defaultHour);
         switch (defaultHour){
@@ -185,6 +183,13 @@ public class ActivityUserSettings extends AppCompatActivity implements AdapterVi
                 mOnlyYou.setImageResource(R.drawable.light_picked);
                 editor.putString(DEFAULT_PRIVACY_KEY, "Only you");
                 editor.apply();
+            }
+        });
+
+        mBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               finish();
             }
         });
 

@@ -85,7 +85,7 @@
                     android:gravity="center"
                     android:background="@drawable/text_area"
                     android:hint="#tag1#tag2#tag3"
-                    android:textColorHint="?attr/textColor"
+                    android:textColorHint="@color/registerAndSignInText"
                     android:textColor="?attr/textColor"/>
 
             </LinearLayout>
@@ -107,7 +107,7 @@
                     android:background="?attr/textAreaColor"
                     android:gravity="top"
                     android:hint="Write about your day"
-                    android:textColorHint="?attr/textColor"
+                    android:textColorHint="@color/registerAndSignInText"
                     android:textColor="?attr/textColor"/>
             </androidx.cardview.widget.CardView>
 

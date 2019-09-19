@@ -24,17 +24,18 @@ public class ActivityBlog extends AppCompatActivity {
     //Constant variable
     private final int DAILY_NOTIFICATION_ID = 1;
     private final int LIKE_COMMENT_NOTIFICATION_ID = 2;
-
-    //Static variable
     public final static long NOTIFICATION_PERIOD = 900000;
 
+    //Static variables
+    public static int userIconResourceId;
+    public static String userName;
+    public static int tabIndex = 0;
 
+    //Member variables
     private TabLayout mTabLayout;
     private AppBarLayout mAppBarLayout;
     private ViewPager mViewPager;
     private FragmentNewFeed mFragmentNewFeed;
-    public static int userIconResourceId;
-    public static String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +78,8 @@ public class ActivityBlog extends AppCompatActivity {
         mTabLayout.getTabAt(0).setIcon(R.drawable.ic_compose);
         mTabLayout.getTabAt(1).setIcon(R.drawable.ic_new_feed);
         mTabLayout.getTabAt(2).setIcon(R.drawable.ic_user_profile);
+
+        mViewPager.setCurrentItem(tabIndex);
 
         //Changing the color when changing between tabs
         TabLayout.OnTabSelectedListener onTabSelectedListener = new TabLayout.OnTabSelectedListener() {

@@ -186,7 +186,7 @@
                             android:paddingLeft="6dp"
                             android:paddingRight="6dp"
                             android:hint="Add a comment"
-                            android:textColorHint="?attr/textColor"
+                            android:textColorHint="@color/registerAndSignInText"
                             android:textColor="?attr/textColor"/>
 
                         <Button

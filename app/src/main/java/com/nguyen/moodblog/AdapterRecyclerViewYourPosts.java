@@ -55,7 +55,7 @@ public class AdapterRecyclerViewYourPosts extends RecyclerView.Adapter<AdapterRe
         if(mUserPosts.get(i).getIsLiked().equals("true")){
             myViewHolder.likeButton.setImageResource(R.drawable.like_red);
             myViewHolder.likeButton.setOnClickListener(null);
-        }
+        } else myViewHolder.likeButton.setImageResource(R.drawable.like_white);
     }
 
     @Override

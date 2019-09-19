@@ -85,9 +85,9 @@
         app:layout_constraintTop_toBottomOf="@+id/id_duration_spinner_edit"
         android:textAlignment="center"
         android:textColor="?attr/textColor"
-        android:textColorHint="?attr/textColor"
+        android:textColorHint="@color/registerAndSignInText"
         android:background="@drawable/text_area"
-        android:hint="Enter heading of your post"/>
+        android:hint="Enter heading of your post" />
 
 
     <Button

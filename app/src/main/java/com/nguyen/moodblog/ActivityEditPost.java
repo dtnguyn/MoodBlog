@@ -273,6 +273,7 @@ public class ActivityEditPost extends AppCompatActivity implements AdapterView.O
                     editor.putInt(NotificationBackgroundService.COMMENT_UPDATE_KEY, 0);
                     editor.apply();
 
+                    ActivityBlog.tabIndex = 1;
                     Intent intent = new Intent(ActivityEditPost.this, ActivityBlog.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
