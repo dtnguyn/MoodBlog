@@ -51,6 +51,13 @@ public class AdapterRecyclerViewSettings extends RecyclerView.Adapter<AdapterRec
             case 1:
                 mySettingsViewHolder.settingIcon.setImageResource(R.drawable.moodprogress);
                 mySettingsViewHolder.cardView.setCardBackgroundColor(mContext.getResources().getColor(R.color.moodProgressButton));
+                mySettingsViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(mContext, ActivityMoodProgress.class);
+                        mContext.startActivity(intent);
+                    }
+                });
                 break;
             case 2:
                 mySettingsViewHolder.settingIcon.setImageResource(R.drawable.app);

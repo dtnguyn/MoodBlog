@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ActivityUserSettings"></activity>
+        <activity android:name=".ActivityMoodProgress"></activity>
+        <activity android:name=".ActivityUserSettings" />
         <activity android:name=".ActivityAppSettings" />
         <activity android:name=".ActivityYourPosts" />
         <activity android:name=".ActivityCompose" />

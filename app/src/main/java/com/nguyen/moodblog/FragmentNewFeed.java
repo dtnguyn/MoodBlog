@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.LayoutInflater;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -56,7 +57,7 @@ public class FragmentNewFeed extends Fragment {
     private int lastIndex;
 
     //UI elements
-    SwipeRefreshLayout mSwipeRefreshLayout;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
 
     public FragmentNewFeed(){
@@ -273,10 +274,6 @@ public class FragmentNewFeed extends Fragment {
         List <UserPost> updatedUserPosts = (ArrayList<UserPost>) dataSnapshot.child("posts").getValue();
         int preUpdatedSize = updatedUserPosts.size();
         for(int i = firstIndex; i >= lastIndex ; i--){
-
-            if(dataSnapshot.child("posts").child("" + i).getValue(UserPost.class) == null){
-                Log.d("MoodBlog", "Index: " + i + " lastIndex: " + lastIndex);
-            }
             if(dataSnapshot.child("posts").child("" + i).getValue(UserPost.class).getDeletionTime().after(Calendar.getInstance().getTime())){
                 if(dataSnapshot.child("posts").child("" + i).getValue(UserPost.class).getOnlyOwner()) {
                     if (dataSnapshot.child("posts").child("" + i).getValue(UserPost.class).getOwnerID().equals(mAuth.getCurrentUser().getUid())) {
