@@ -28,6 +28,7 @@ import com.nguyen.moodblog.Interface.LoadMore;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import static java.lang.Integer.parseInt;
@@ -96,8 +97,6 @@ public class FragmentNewFeed extends Fragment {
                 if(lastIndex < 0){
                     lastIndex = 0;
                 }
-                Log.d("MoodBlog", "lastIndex ini: " + lastIndex);
-                Log.d("MoodBlog", "fistIndex ini: " + firstIndex);
             }
 
             @Override
@@ -138,7 +137,7 @@ public class FragmentNewFeed extends Fragment {
                             recyClerViewAdapter.setLoadMore(new LoadMore() {
                                 @Override
                                 public void onLoadMore() {
-                                    if(mUserPosts.size() <= (int) dataSnapshot.child("posts").getChildrenCount() - 1){
+                                    if(lastIndex > 0){
                                         mUserPosts.add(null);
                                         recyClerViewAdapter.notifyItemInserted(mUserPosts.size() - 1);
                                         new Handler().postDelayed(new Runnable() {
@@ -192,7 +191,7 @@ public class FragmentNewFeed extends Fragment {
                     recyClerViewAdapter.setLoadMore(new LoadMore() {
                         @Override
                         public void onLoadMore() {
-                            if(mUserPosts.size() <= (int) dataSnapshot.child("posts").getChildrenCount() - 1){
+                            if(lastIndex > 0){
                                 mUserPosts.add(null);
                                 recyClerViewAdapter.notifyItemInserted(mUserPosts.size() - 1);
                                 new Handler().postDelayed(new Runnable() {
@@ -291,11 +290,8 @@ public class FragmentNewFeed extends Fragment {
                     mUserPosts.add(userPost);
                 }
             } else {
-
                 //Update the userPost list on database
                 updatedUserPosts.remove(i);
-                myRef.child("posts").setValue(updatedUserPosts);
-
                 lastIndex--;
                 if(lastIndex < 0){
                     lastIndex = 0;
@@ -382,6 +378,13 @@ public class FragmentNewFeed extends Fragment {
         }
         return  userIconResourceID;
 
+    }
+
+    public Date addHoursToDate(Date date, int hours) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.HOUR_OF_DAY, hours);
+        return calendar.getTime();
     }
 
 }
