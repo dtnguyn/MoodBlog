@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.nguyen.moodblog.Interface.LoadMore;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class AdapterRecyclerViewNewFeeds extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
@@ -118,7 +120,10 @@ public class AdapterRecyclerViewNewFeeds extends RecyclerView.Adapter<RecyclerVi
 
             //Set up the like button
             mUserPosts.get(i).setLikeButton(myViewHolder.likeButton);
-            mUserPosts.get(i).like(); //Call the like() function to allow the onclickListener inside to work
+
+            if(mUserPosts.get(i).getDeletionTime().after(Calendar.getInstance().getTime())){
+                mUserPosts.get(i).like(); //Call the like() function to allow the onclickListener inside to work
+            }
 
             //Set up the comment button
             mUserPosts.get(i).setCommentButton(myViewHolder.comment);

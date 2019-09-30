@@ -274,7 +274,12 @@ public class FragmentNewFeed extends Fragment {
         List <UserPost> updatedUserPosts = (ArrayList<UserPost>) dataSnapshot.child("posts").getValue();
         int preUpdatedSize = updatedUserPosts.size();
         for(int i = firstIndex; i >= lastIndex ; i--){
-            if(dataSnapshot.child("posts").child("" + i).getValue(UserPost.class).getDeletionTime().after(Calendar.getInstance().getTime())){
+            Date deletionTime;
+            if(dataSnapshot.child("posts").child("" + i).getValue(UserPost.class).getDeletionTime() != null){
+                deletionTime = dataSnapshot.child("posts").child("" + i).getValue(UserPost.class).getDeletionTime();
+            } else deletionTime = null;
+
+            if(deletionTime != null && deletionTime.after(Calendar.getInstance().getTime())){
                 if(dataSnapshot.child("posts").child("" + i).getValue(UserPost.class).getOnlyOwner()) {
                     if (dataSnapshot.child("posts").child("" + i).getValue(UserPost.class).getOwnerID().equals(mAuth.getCurrentUser().getUid())) {
                         UserPost userPost = new UserPost();

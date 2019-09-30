@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -279,6 +280,7 @@ public class UserPost {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         String userID = mAuth.getCurrentUser().getUid();
                         List<String> likePosts;
+
                         //Check if the likePosts has already existed on the database or not
                         if ((List<String>) dataSnapshot.child("users").child(userID).child("likedPosts").getValue() != null) {
                             likePosts = (ArrayList<String>) dataSnapshot.child("users").child(userID).child("likedPosts").getValue();
@@ -295,6 +297,7 @@ public class UserPost {
 
                     }
                 });
+
 
             }
         });
