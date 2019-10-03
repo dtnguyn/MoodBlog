@@ -157,9 +157,6 @@ public class FragmentNewFeed extends Fragment {
 
                                                 recyClerViewAdapter.notifyDataSetChanged();
                                                 recyClerViewAdapter.setLoaded();
-                                                if(lastIndex == 0){
-                                                    mFinishLoadingFeeds = true;
-                                                }
                                             }
                                         }, 2500);
                                     }
@@ -212,9 +209,6 @@ public class FragmentNewFeed extends Fragment {
                                         getFeedsFromDatabase(dataSnapshot, likePosts, userID);
                                         recyClerViewAdapter.notifyDataSetChanged();
                                         recyClerViewAdapter.setLoaded();
-                                        if(lastIndex == 0){
-                                            mFinishLoadingFeeds = true;
-                                        }
                                     }
                                 }, 2500);
                             }
@@ -312,8 +306,10 @@ public class FragmentNewFeed extends Fragment {
             myRef.child("posts").setValue(updatedUserPosts);
         }
 
+
         if(lastIndex == 0){
             mFinishLoadingFeeds = true;
+
         }
 
         firstIndex = lastIndex - 1;
