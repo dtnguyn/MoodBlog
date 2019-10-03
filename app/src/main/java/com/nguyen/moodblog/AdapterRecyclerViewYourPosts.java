@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class AdapterRecyclerViewYourPosts extends RecyclerView.Adapter<AdapterRecyclerViewYourPosts.MyYourPostViewHolder>{
@@ -42,7 +43,10 @@ public class AdapterRecyclerViewYourPosts extends RecyclerView.Adapter<AdapterRe
 
         //Set up the like button
         mUserPosts.get(i).setLikeButton(myViewHolder.likeButton);
-        mUserPosts.get(i).like(); //Call the like() function to allow the onclickListener inside to work
+
+        if(mUserPosts.get(i).getDeletionTime().after(Calendar.getInstance().getTime())){
+            mUserPosts.get(i).like(); //Call the like() function to allow the onclickListener inside to work
+        }
 
         //Set up the comment button
         mUserPosts.get(i).setCommentButton(myViewHolder.comment);

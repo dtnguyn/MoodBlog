@@ -135,7 +135,6 @@ public class AdapterRecyclerViewNewFeeds extends RecyclerView.Adapter<RecyclerVi
 
             //If the post is already liked, then the like button is turned red and disabled
             if(mUserPosts.get(i).getIsLiked().equals("true")) {
-
                 myViewHolder.likeButton.setImageResource(R.drawable.like_red);
                 myViewHolder.likeButton.setOnClickListener(null);
             } else myViewHolder.likeButton.setImageResource(R.drawable.like_white);
