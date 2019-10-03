@@ -95,12 +95,12 @@ public class NotificationBackgroundService extends JobService {
 
     public void sendOnDailyNotificationChannel(){
         //Set up when the user clicks on the notification, it will jump into the app
-        Intent activityIntent = new Intent(getApplicationContext(), ActivityMain.class);
+        Intent activityIntent = new Intent(getApplicationContext(), ActivityMoodProgress.class);
         PendingIntent contentIntent =  PendingIntent.getActivity(this, 0, activityIntent, 0);
 
-        //Set up action button for notification
-        Intent broadcastIntent = new Intent(getApplicationContext(), NotificationReceiver.class);
-        PendingIntent actionIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+//        //Set up action button for notification
+//        Intent broadcastIntent = new Intent(getApplicationContext(), NotificationReceiver.class);
+//        PendingIntent actionIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Notification notification = new NotificationCompat.Builder(getApplicationContext(), NotificationChannelCreator.DAILY_NOTIFICATION_CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_compose)
@@ -110,10 +110,6 @@ public class NotificationBackgroundService extends JobService {
                 .setCategory(NotificationCompat.CATEGORY_EVENT)
                 .setContentIntent(contentIntent)
                 .setAutoCancel(true)
-                .addAction(R.drawable.ic_compose, "Bad", actionIntent)
-                .setColor(Color.rgb(255,189,89))
-                .addAction(R.drawable.ic_compose, "Good",actionIntent)
-                .setOnlyAlertOnce(true)
                 .build();
 
 
