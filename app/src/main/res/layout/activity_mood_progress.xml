@@ -98,7 +98,8 @@
                     android:textColor="?attr/textColor"
                     android:textSize="16sp"
                     android:fontFamily="@font/montserrat_bold"
-                    android:layout_centerInParent="true" />
+                    android:layout_centerInParent="true"
+                    android:paddingBottom="10dp"/>
             </RelativeLayout>
 
 

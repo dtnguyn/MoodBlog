@@ -55,6 +55,7 @@ public class FragmentNewFeed extends Fragment {
     private List<UserPost>mUserPosts = new ArrayList<>();
     private int firstIndex;
     private int lastIndex;
+    private Boolean mFinishLoadingFeeds = false;
 
     //UI elements
     private SwipeRefreshLayout mSwipeRefreshLayout;
@@ -97,7 +98,9 @@ public class FragmentNewFeed extends Fragment {
                 lastIndex = firstIndex - 9;
                 if(lastIndex < 0){
                     lastIndex = 0;
+                    mFinishLoadingFeeds = true;
                 }
+
             }
 
             @Override
@@ -116,7 +119,7 @@ public class FragmentNewFeed extends Fragment {
                 myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
-
+                        mFinishLoadingFeeds = false;
                         if(dataSnapshot.child("posts").getValue() != null){
                             String userID = mAuth.getCurrentUser().getUid();
                             List <String> likePosts = new ArrayList<>();
@@ -125,6 +128,7 @@ public class FragmentNewFeed extends Fragment {
                             lastIndex = firstIndex - 9;
                             if(lastIndex < 0){
                                 lastIndex = 0;
+                                mFinishLoadingFeeds = true;
                             }
 
                             getFeedsFromDatabase(dataSnapshot, likePosts,userID);
@@ -138,7 +142,7 @@ public class FragmentNewFeed extends Fragment {
                             recyClerViewAdapter.setLoadMore(new LoadMore() {
                                 @Override
                                 public void onLoadMore() {
-                                    if(lastIndex > 0){
+                                    if(!mFinishLoadingFeeds){
                                         mUserPosts.add(null);
                                         recyClerViewAdapter.notifyItemInserted(mUserPosts.size() - 1);
                                         new Handler().postDelayed(new Runnable() {
@@ -153,6 +157,9 @@ public class FragmentNewFeed extends Fragment {
 
                                                 recyClerViewAdapter.notifyDataSetChanged();
                                                 recyClerViewAdapter.setLoaded();
+                                                if(lastIndex == 0){
+                                                    mFinishLoadingFeeds = true;
+                                                }
                                             }
                                         }, 2500);
                                     }
@@ -192,7 +199,7 @@ public class FragmentNewFeed extends Fragment {
                     recyClerViewAdapter.setLoadMore(new LoadMore() {
                         @Override
                         public void onLoadMore() {
-                            if(lastIndex > 0){
+                            if(!mFinishLoadingFeeds){
                                 mUserPosts.add(null);
                                 recyClerViewAdapter.notifyItemInserted(mUserPosts.size() - 1);
                                 new Handler().postDelayed(new Runnable() {
@@ -200,13 +207,14 @@ public class FragmentNewFeed extends Fragment {
                                     public void run() {
                                         mUserPosts.remove(mUserPosts.size() - 1);
                                         recyClerViewAdapter.notifyItemRemoved(mUserPosts.size());
-
                                         String userID = mAuth.getCurrentUser().getUid();
                                         List <String> likePosts = new ArrayList<>();
                                         getFeedsFromDatabase(dataSnapshot, likePosts, userID);
-
                                         recyClerViewAdapter.notifyDataSetChanged();
                                         recyClerViewAdapter.setLoaded();
+                                        if(lastIndex == 0){
+                                            mFinishLoadingFeeds = true;
+                                        }
                                     }
                                 }, 2500);
                             }
@@ -302,6 +310,10 @@ public class FragmentNewFeed extends Fragment {
         }
         if(updatedUserPosts.size() != preUpdatedSize){
             myRef.child("posts").setValue(updatedUserPosts);
+        }
+
+        if(lastIndex == 0){
+            mFinishLoadingFeeds = true;
         }
 
         firstIndex = lastIndex - 1;

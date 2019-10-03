@@ -164,42 +164,54 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginRight="4dp"
                         android:orientation="horizontal">
 
-
-                        <ImageView
-                            android:id="@+id/img_comment_avartar_commentActivity"
-                            android:layout_width="56dp"
-                            android:layout_height="56dp"
-                            android:src="@mipmap/ic_launcher_round" />
-
-                        <EditText
-                            android:id="@+id/comment_area"
-                            android:layout_width="250dp"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/text_area_white"
-                            android:layout_marginLeft="8dp"
-                            android:paddingLeft="6dp"
-                            android:paddingRight="6dp"
-                            android:hint="Add a comment"
-                            android:textColorHint="@color/registerAndSignInText"
-                            android:textColor="?attr/textColor"/>
 
                         <Button
                             android:id="@+id/add_comment_button"
                             android:layout_width="60dp"
                             android:layout_height="wrap_content"
                             android:background="@drawable/comment_button"
-                            android:layout_marginLeft="4dp"
-                            android:layout_marginTop="4dp"
                             android:text="Add"
-                            android:textColor="?attr/textColor"/>
+                            android:textColor="?attr/textColor"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                    </LinearLayout>
+                        <EditText
+                            android:id="@+id/comment_area"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="4dp"
+                            android:background="@drawable/text_area_white"
+                            android:hint="Add a comment"
+                            android:paddingLeft="6dp"
+                            android:paddingRight="6dp"
+                            android:textColor="?attr/textColor"
+                            android:textColorHint="@color/registerAndSignInText"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/add_comment_button"
+                            app:layout_constraintStart_toEndOf="@+id/img_comment_avartar_commentActivity"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/img_comment_avartar_commentActivity"
+                            android:layout_width="56dp"
+                            android:layout_height="56dp"
+                            android:src="@mipmap/ic_launcher_round"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/comment_recyclerView"

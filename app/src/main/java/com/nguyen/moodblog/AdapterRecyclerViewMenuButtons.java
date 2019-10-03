@@ -41,21 +41,34 @@ public class AdapterRecyclerViewMenuButtons extends RecyclerView.Adapter<Adapter
             myViewHolder.menuButton.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 250));
             //myViewHolder.menuButton.setPadding(230,0,0,0);
             myViewHolder.menuButton.setGravity(Gravity.CENTER);
+            myViewHolder.menuButton.setText(mMenuButtons.get(i).getText());
+            myViewHolder.menuButton.setTypeface(mMenuButtons.get(i).getFont());
+            myViewHolder.menuButton.setBackgroundResource(mMenuButtons.get(i).getBackgroundColor());
+            myViewHolder.menuButton.setTextColor(mMenuButtons.get(i).getTextColor());
+            myViewHolder.userMood = mMenuButtons.get(i).getText();
+            myViewHolder.menuButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, ActivityMoodProgress.class);
+                    mContext.startActivity(intent);
+                }
+            });
+        } else {
+            myViewHolder.menuButton.setText(mMenuButtons.get(i).getText());
+            myViewHolder.menuButton.setTypeface(mMenuButtons.get(i).getFont());
+            myViewHolder.menuButton.setBackgroundResource(mMenuButtons.get(i).getBackgroundColor());
+            myViewHolder.menuButton.setTextColor(mMenuButtons.get(i).getTextColor());
+            myViewHolder.userMood = mMenuButtons.get(i).getText();
+            myViewHolder.menuButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ActivityCompose.mUserMood = myViewHolder.userMood;
+                    Intent intent = new Intent(mContext, ActivityCompose.class);
+                    mContext.startActivity(intent);
+                }
+            });
         }
-        myViewHolder.menuButton.setText(mMenuButtons.get(i).getText());
-        myViewHolder.menuButton.setTypeface(mMenuButtons.get(i).getFont());
-        myViewHolder.menuButton.setBackgroundResource(mMenuButtons.get(i).getBackgroundColor());
-        myViewHolder.menuButton.setTextColor(mMenuButtons.get(i).getTextColor());
-        myViewHolder.userMood = mMenuButtons.get(i).getText();
 
-        myViewHolder.menuButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ActivityCompose.mUserMood = myViewHolder.userMood;
-                Intent intent = new Intent(mContext, ActivityCompose.class);
-                mContext.startActivity(intent);
-            }
-        });
     }
 
     @Override

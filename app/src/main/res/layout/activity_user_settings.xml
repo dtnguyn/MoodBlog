@@ -200,8 +200,8 @@
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:text="everyone will see your post under your name"
+                            android:layout_height="wrap_content"
+                            android:text="your post is under your name"
                             android:textColor="?attr/textColor"/>
                     </LinearLayout>
 
@@ -255,8 +255,8 @@
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:text="everyone will see your post under Anonymous"
+                            android:layout_height="wrap_content"
+                            android:text="your post is under Anonymous"
                             android:textColor="?attr/textColor"/>
                     </LinearLayout>
 

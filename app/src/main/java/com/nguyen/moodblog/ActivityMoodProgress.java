@@ -54,6 +54,7 @@ public class ActivityMoodProgress extends AppCompatActivity {
     private ArrayList<BarEntry> mBarEntries;
     private List <Mood> mMoodProgress;
     private int mAverageMoodValue = -1;
+    Calendar calendar = Calendar.getInstance();
 
     //Firebase Variables
     private FirebaseDatabase mFirebaseDatabase;
@@ -106,14 +107,11 @@ public class ActivityMoodProgress extends AppCompatActivity {
         updateBarGraph();
 
         //Update Quotes
-        updateQuote(new RequestParams());
+        updateQuote(this);
 
-        if(prefs.getString(MOOD_PROGRESS_UPDATED, "false").equals(false)){
 
-            Log.d("MoodBlog", "Called dialog");
-        }
-        DialogMoodProgress dialogMoodProgress = new DialogMoodProgress(mMoodProgress, this);
-        dialogMoodProgress.show(getSupportFragmentManager(), "MoodBlog");
+
+
 
 
 
@@ -202,7 +200,6 @@ public class ActivityMoodProgress extends AppCompatActivity {
                 mBarEntries = new ArrayList<>();
                 if(dataSnapshot.child("users").child(userID).child("moodProgress").getValue() != null){
                     for(int i = 0; i < dataSnapshot.child("users").child(userID).child("moodProgress").getChildrenCount(); i++){
-                        Calendar calendar = Calendar.getInstance();
                         String currentDate = DateFormat.getDateInstance(DateFormat.SHORT).format(calendar.getTime());
                         Mood mood = new Mood();
                         mood.setMoodValue(dataSnapshot.child("users").child(userID).child("moodProgress").child("" + i).getValue(Mood.class).getMoodValue());
@@ -227,6 +224,7 @@ public class ActivityMoodProgress extends AppCompatActivity {
                 mBarChart.getLegend().setEnabled(false);
                 mBarChart.setExtraTopOffset(5);
                 updateMoodAverage();
+                Log.d("MoodBlog", "mood size: " + mMoodProgress.size());
             }
 
             @Override
@@ -243,9 +241,17 @@ public class ActivityMoodProgress extends AppCompatActivity {
             totalValue += mMoodProgress.get(i).getMoodValue();
         }
 
-        mAverageMoodValue = (totalValue / mMoodProgress.size()) * 10;
-        mAveragePercent.setText("" + mAverageMoodValue + "%");
-        setUpCircle(mAverageMoodValue);
+        if(mMoodProgress.isEmpty()){
+            mAveragePercent.setText("No data");
+            mPieChart.setImageResource(R.drawable.default_percent);
+            mStatusLine.setText("Enter data!");
+        } else {
+            mAverageMoodValue = (totalValue / mMoodProgress.size()) * 10;
+            mAveragePercent.setText("" + mAverageMoodValue + "%");
+            setUpCircle(mAverageMoodValue);
+        }
+
+
     }
 
     private void setUpCircle(int averageValue){
@@ -300,23 +306,27 @@ public class ActivityMoodProgress extends AppCompatActivity {
     }
 
     //Get information from Brainy Quotes
-    private void updateQuote(RequestParams params){
+    private void updateQuoteFromAPIRequest(RequestParams params){
         AsyncHttpClient client = new AsyncHttpClient();
+        Log.d("MoodBlog", "Here??");
+
         client.get(DAILY_QUOTES_URL, params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                //Log.d("MoodBlog", "Success: " + response.toString());
+                Log.d("MoodBlog", "Success: " + response.toString());
                 try {
                     String content = response.getJSONObject("contents").getJSONArray("quotes").getJSONObject(0).getString("quote");
                     String author = response.getJSONObject("contents").getJSONArray("quotes").getJSONObject(0).getString("author");
+                    String currentDate = DateFormat.getDateInstance(DateFormat.SHORT).format(calendar.getTime());
+
+                    QuoteData quote = new QuoteData(currentDate, content, author);
+                    myRef.child("dailyQuote").setValue(quote);
                     Log.d("MoodBlog", "Success: " + content);
                     mQuoteContent.setText("'" + content + "'");
                     mQuoteAuthor.setText(author);
                 } catch (JSONException e){
                     e.printStackTrace();
                 }
-
-
 
             }
 
@@ -326,6 +336,38 @@ public class ActivityMoodProgress extends AppCompatActivity {
             }
         });
     }
+
+    //Update quote
+    private void updateQuote(final ActivityMoodProgress activity){
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.child("dailyQuote").getValue(QuoteData.class) != null){
+                    String currentDate = DateFormat.getDateInstance(DateFormat.SHORT).format(calendar.getTime());
+                    Log.d("MoodBlog", "Current date: " + currentDate);
+                    if(dataSnapshot.child("dailyQuote").getValue(QuoteData.class).getDate().equals(currentDate)){
+                        String content = dataSnapshot.child("dailyQuote").getValue(QuoteData.class).getContent();
+                        String author = dataSnapshot.child("dailyQuote").getValue(QuoteData.class).getAuthor();
+                        mQuoteAuthor.setText(author);
+                        mQuoteContent.setText(content);
+                    } else updateQuoteFromAPIRequest(new RequestParams());
+                } else updateQuoteFromAPIRequest(new RequestParams());
+
+                String currentDate = DateFormat.getDateInstance(DateFormat.SHORT).format(calendar.getTime());
+                if(!mMoodProgress.get(mMoodProgress.size() - 1).getDate().equals(currentDate)){
+                    DialogMoodProgress dialogMoodProgress = new DialogMoodProgress(mMoodProgress, activity);
+                    dialogMoodProgress.show(getSupportFragmentManager(), "MoodBlog");
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 }
 
 
