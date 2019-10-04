@@ -354,7 +354,10 @@ public class ActivityMoodProgress extends AppCompatActivity {
                 } else updateQuoteFromAPIRequest(new RequestParams());
 
                 String currentDate = DateFormat.getDateInstance(DateFormat.SHORT).format(calendar.getTime());
-                if(!mMoodProgress.get(mMoodProgress.size() - 1).getDate().equals(currentDate)){
+                if(mMoodProgress.size() == 0 ){
+                    DialogMoodProgress dialogMoodProgress = new DialogMoodProgress(mMoodProgress, activity);
+                    dialogMoodProgress.show(getSupportFragmentManager(), "MoodBlog");
+                } else if (!mMoodProgress.get(mMoodProgress.size() - 1).getDate().equals(currentDate)){
                     DialogMoodProgress dialogMoodProgress = new DialogMoodProgress(mMoodProgress, activity);
                     dialogMoodProgress.show(getSupportFragmentManager(), "MoodBlog");
                 }

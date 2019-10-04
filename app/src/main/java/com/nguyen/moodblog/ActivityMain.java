@@ -58,7 +58,7 @@ public class ActivityMain extends AppCompatActivity {
                     if(!task.isSuccessful()){
                         Log.d("MoodBlog", "Problem signing in: " + task.getException());
                         showErrorDialog("Problem signing in: " + task.getException().getMessage());
-
+                        setContentView(R.layout.activity_main);
                     } else {
                         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
